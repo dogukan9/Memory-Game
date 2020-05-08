@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+  
+ .z{
+        z-index: 5;
+        
+        
+    }
+    .ekle{
+        position: relative;
+        overflow: hidden;
+    }
+    .z2{
+        z-index: 1;
+          position: absolute;
+          
+    }
+     img{
+        width: 95px;
+        height: 95px;
+          border: 2px solid black;
+         
+
+      
+    }
+        .container{
+      width: 50%;
+      
+    }
+    .card-header{
+    width:500px;
+        margin: auto;
+    }
+    
+    </style>
+   
+<body>
+    Start the game:00:00:<span>59</span> 
+        <button class ="btn btn-primary m-3">Start</button>
+       
+        
+  
+            <div class="card-header text-center ">
+                    <i><b>Welcome To Doğukan Game Pages's</b></i>  
+            </div>
+            
+    <div class="container">
+    
+            <div class="card-body">
+                     <div class="row"></div>
+                     <div class="row"></div>
+                     <div class="row"></div>
+                     <div class="row"></div>
+            </div>
+        </div>
+       
+     <button class="btn btn-danger">Show All</button>
+    
+    
+    
+    
+    <script>
+      const galery=[
+    {
+      
+        image:"img/agentSmith.jpg"
+    },
+    {
+      
+        image: "img/alexDeLarge.jpg"
+
+    },
+    {
+       
+        image:"img/amongoeth.jpg"
+                       
+
+    },
+    {
+    
+        image:"img/download.jpg"
+
+    },
+    {
+
+      
+        image:"img/agentSmith.jpg"
+    },
+    {
+      
+        image: "img/alexDeLarge.jpg"
+
+    },
+    {
+       
+        image:"img/amongoeth.jpg"
+                       
+
+    },
+    {
+    
+        image:"img/download.jpg"
+
+    },
+    { 
+
+      
+        image:"img/antonchigurh.jpg"
+    },
+    {
+      
+        image: "img/jigsaw.jpg"
+
+    },
+    {
+       
+        image:"img/lordvoldemort.jpg"
+                       
+
+    },
+    {
+    
+        image:"img/godfather.jpg"
+
+    },
+    {
+
+      
+        image:"img/antonchigurh.jpg"
+    },
+    {
+      
+        image: "img/jigsaw.jpg"
+
+    },
+    {
+       
+        image:"img/lordvoldemort.jpg"
+                       
+
+    },
+    {
+    
+        image:"img/godfather.jpg"
+
+    }
+
+
+        ];
+const row=document.querySelectorAll(".row");
+const card=document.querySelectorAll(".card-body");
+const buton=document.querySelector(".btn-danger");
+const buton2=document.querySelector(".btn-primary");
+const timer=document.querySelector("span");
+
+init();
+
+buton2.addEventListener("click",function(){
+    buton2.disabled=true;
+     
+   go(); 
+});
+
+
+function init(){
+var j=0;
+  var count=0;
+    
+    var num=random();
+    var k=0;
+for(j=0;j<4;j++){
+     const div=document.createElement("div");
+     div.className="ekle";
+     
+    var html="";
+    var i=0;   
+    
+      while(i<4){
+          div.innerHTML+=`<img class="col-3 z2"src=${galery[num[k]].image}>`;
+         div.innerHTML+=`<img id="${String(count)}"class="col-3 hide z" src="img/soru.jpg">`;
+        
+       k++;
+          i++;
+          count++;
+            
+      
+      }
+    row[j].appendChild(div);
+     
+};
+   
+}
+function random(){
+    let i=0;
+    let ar=[];
+   let sayi;
+    while(i<16){
+         sayi= Math.floor(Math.random()*16);
+        if(!(ar.includes(sayi))){
+             ar.push(sayi);
+            i++;
+        }
+          
+    }
+   
+    return ar;
+}
+const hadd=document.querySelectorAll(".ekle");
+var say2=0;
+var arr=[];
+var oz=[];
+
+
+var say=0;
+
+const container=document.querySelector(".container").addEventListener("click",function(e){
+    if(buton2.disabled==true){
+    e.target.style.zIndex=0;
+  
+   if(say2<2){
+       oz.push(e.target);
+       arr.push(e.target.previousSibling.src);
+        
+       if(arr[0]===arr[1]){
+           
+        oz[0].src=arr[0];
+        e.target.src=e.target.previousSibling.src;
+       say++;
+           if(say==8){
+              
+               timer.textContent=0;
+                
+               say=0;
+               if(confirm("YOU WON THE GAME!DO you want TO PLAY AGAİN?")){
+                hadd.forEach(function(a){
+                      a.remove();
+                   })
+               }
+               init();
+              
+               return;
+           }
+        }
+        
+     }say2++;
+     if(say2>=2){
+        say2=0;
+        arr.pop();
+        arr.pop();
+         oz.pop();
+         oz.pop();
+    }
+    setTimeout(function(){
+ 
+           e.target.style.zIndex=1;
+       
+      
+        say3=0;
+          },1500);
+        
+      
+}});
+    
+function go(){
+    timer.textContent-=1;
+    setTimeout(function(){
+         if(timer.textContent>0){
+            go(); 
+        }
+   
+       
+        else if(timer.textContent==0){
+            alert("Time is up!Try again");
+         
+            timer.textContent=59;
+            buton2.disabled=false;
+           
+        }
+        
+       
+    },1000);
+}
+buton.addEventListener("click",function(){
+   const hide=document.querySelectorAll(".hide");
+    let i;
+   
+    for(i=0;i<hide.length;i++){
+       
+        hide[i].style.zIndex=0;
+    }
+    setTimeout(function(){
+        for(i=0;i<hide.length;i++){
+       hide[i].style.zIndex=1;
+    } 
+    },3000);
+    
+});
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
